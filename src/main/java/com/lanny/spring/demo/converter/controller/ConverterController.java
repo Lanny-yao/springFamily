@@ -4,6 +4,7 @@ import com.lanny.spring.demo.converter.ConverterService;
 import com.lanny.spring.demo.converter.domain.DestinationModel;
 import com.lanny.spring.demo.converter.domain.SourceModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 9/17/2018 4:25 PM
  */
 @RestController
+@CrossOrigin(origins = {"*"})
 public class ConverterController {
 
     @Autowired

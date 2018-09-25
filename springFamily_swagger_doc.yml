@@ -1,0 +1,107 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: "Spring Family API"
+  x-released: "no"
+host: "localhost:8080"
+basePath: "/"
+tags:
+- name: "converter-controller"
+  description: "Converter Controller"
+- name: "validate-controller"
+  description: "Validate Controller"
+paths:
+  /converter:
+    post:
+      tags:
+      - "converter-controller"
+      summary: "convert"
+      operationId: "convertUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - in: "body"
+        name: "sourceModel"
+        description: "sourceModel"
+        required: true
+        schema:
+          $ref: "#/definitions/SourceModel"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DestinationModel"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+  /validator:
+    post:
+      tags:
+      - "validate-controller"
+      summary: "validate"
+      operationId: "validateUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - in: "body"
+        name: "child"
+        description: "child"
+        required: true
+        schema:
+          $ref: "#/definitions/Child"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+definitions:
+  Child:
+    type: "object"
+    required:
+    - "dressColor"
+    - "gender"
+    - "name"
+    - "parentName"
+    properties:
+      age:
+        type: "integer"
+        format: "int32"
+        minimum: 0.0
+        maximum: 10.0
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      dressColor:
+        type: "string"
+      gender:
+        type: "string"
+      name:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+      parentName:
+        type: "string"
+    title: "Child"
+  DestinationModel:
+    type: "object"
+    title: "DestinationModel"
+  SourceModel:
+    type: "object"
+    properties:
+      srcAge:
+        type: "integer"
+        format: "int32"
+      srcName:
+        type: "string"
+    title: "SourceModel"
